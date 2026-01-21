@@ -105,13 +105,33 @@ public class Script {
      * @return true if the two scripts match, false otherwise
      */
     public boolean matches(Script other) {
-        if(other.x == x && other.y == y && other.action.equals(action) && other.argument.equals(argument)){
-            return true;
+        boolean matchX = false;
+        boolean matchY = false;
+        boolean matchAction = false;
+        boolean matchArgument = false;
 
+         if (x == other.getX() || x == -1 || other.getX() == -1) {
+            matchX = true;
+        }
+        if (y == other.getY() || y == -1 || other.getY() == -1) {
+            matchY = true;
+        }
+        if (action == null || other.getAction() == null || action.equals(other.getAction())) {
+            matchAction = true;
+        }
+        if (argument == null || other.getArgument() == null || argument.equals(other.getArgument())) {
+            matchArgument = true;
+        }
+        if (matchX == false || matchY == false || matchAction == false || matchArgument == false) {
+            return false;
         } else {
-    	return false;
+            return true;
+        }
+
+
     }
-    }
+
+    
     
 /* * * * * Extension for part 1 * * * * */
 
