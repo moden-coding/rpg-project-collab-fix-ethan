@@ -163,6 +163,13 @@ public class Level extends Object {
      *         no matching scripts in this <code>Level</code>.
      */
     public Script getScript(Script template) {
+         ArrayList<Script> matches = new ArrayList<>();
+         for(Script script : level){
+            if(script.matches(template)){
+                matches.add(script);
+                return script;
+            }
+         }
         return null;
     }
 
@@ -179,7 +186,20 @@ public class Level extends Object {
      *         this <code>Level</code>.
      */
     public Script getScript(int n, Script template) {
-        return null;
+        ArrayList<Script> matches = new ArrayList<>();
+        for (Script script : level) {
+            if (script.matches(template)) {
+                matches.add(script);
+            }
+        }
+        if(n>=matches.size()|| n<0){
+            return null;
+        }else{
+            return matches.get(n);
+
+        }
+
+        
     }
 
     /* * * * * Beginning of part 3 * * * * */
