@@ -190,12 +190,7 @@ public class TestCases extends junit.framework.TestCase {
         level.addScript(c);
         level.addScript(d);
         level.addScript(e);
-        
-        // Test the basic getScript
-        assertTrue("The script added first should be the one returned by the simple getScript(script).", level.getScript(a) != e);
-        assertTrue("Using a script itself as a template should always locate that script in a level.", level.getScript(a) == a);
-        assertTrue("If a script is not in a level, getScript(script) should return null.", level.getScript(n) == null);
-        
+
         // Test the array getScripts()
         ArrayList scripts = level.getScripts(new Script(1, -1, null, null));
         assertTrue("The getScripts(script) method should return an array of all the scripts that match the given template.", scripts != null && scripts.size() == 4);
@@ -203,6 +198,13 @@ public class TestCases extends junit.framework.TestCase {
         scripts = level.getScripts(n);
         assertTrue("If there are no scripts matching the template, |getScripts()| should return an empty ArrayList.", scripts != null && scripts.isEmpty());
         
+        
+        // Test the basic getScript
+        assertTrue("The script added first should be the one returned by the simple getScript(script).", level.getScript(a) != e);
+        assertTrue("Using a script itself as a template should always locate that script in a level.", level.getScript(a) == a);
+        assertTrue("If a script is not in a level, getScript(script) should return null.", level.getScript(n) == null);
+        
+
         // Test getScript(n, script)
         assertTrue("The getScript(n, script) method should return matches in the order they were added to the level.", level.getScript(0, a) == a && level.getScript(1, a) == e);
         assertTrue("The getScript(n, script) method should return null if the index is greater than or equal to the number of matches.", level.getScript(2, a) == null);
