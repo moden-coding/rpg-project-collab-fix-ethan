@@ -37,6 +37,7 @@ public class Level extends Object {
 
     private String name;
     private int width, height;
+    
 
     /**
      * Return the name of this level.
@@ -114,7 +115,7 @@ public class Level extends Object {
      * to start adding scripts.
      */
     ArrayList<Script> level;
-
+    
     public Level() {
         level = new ArrayList<>();
     }
@@ -125,17 +126,24 @@ public class Level extends Object {
      * @param script Script to add
      */
     public void addScript(Script script) {
-        level.add(script);
+    if (script.getLevel() != null) {
+        script.getLevel().removeScript(script);
     }
+    script.setLevel(this);
+    level.add(script);
+}
 
     /**
      * Remove the given script from the level.
      * 
      * @param script script to remove
      */
-    public void removeScript(Script script) {
-        level.remove(script);
-    }
+   public void removeScript(Script script) {
+    script.setLevel(null);
+    level.remove(script);
+
+}
+
 
     /**
      * Return an <code>ArrayList</code> containing all scripts in this
@@ -252,7 +260,9 @@ public class Level extends Object {
     // The "throws" below just warns the computer that if something
     // bizarre happens there might be an exception produced as we try
     // to read the file.
+    
     public Level(BufferedReader file) throws IOException {
+
     }
 
     /* * * * * Extension for part 3 * * * * */
